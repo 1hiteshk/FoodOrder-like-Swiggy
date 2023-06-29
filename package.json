@@ -1,0 +1,37 @@
+{
+  "name": "namaste-react-live",
+  "version": "1.0.0",
+  "description": "This is a live course",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/namastedev/namaste-react-live.git"
+  },
+  "author": "Akshay Saini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/namastedev/namaste-react-live/issues"
+  },
+  "homepage": "https://bitbucket.org/namastedev/namaste-react-live#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "grunt-postcss": "^0.9.0",
+    "parcel": "^2.9.3",
+    "postcss": "^8.4.24",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.2"
+  },
+  "browserslist": [
+    "last 10 Chrome versions"
+  ]
+}
