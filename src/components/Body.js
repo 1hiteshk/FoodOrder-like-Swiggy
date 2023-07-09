@@ -6,20 +6,37 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
+import useGeoLocation from "./useGeoLocation";
+
+// export const location = useGeoLocation();
+// export const lat = location.coordinates.lat;
+// export const lng = location.coordinates.lng;
+
+
 
   const Body = ({/*user*/}) => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const {user,setUser} = useContext(userContext);
+  const location = useGeoLocation();
+  const lat = location.coordinates.lat;
+  const lng = location.coordinates.lng;
+  console.log("hitu" , lng);
+  const REST_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
 
+console.log(REST_URL);
+  
+
+  
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [REST_URL]);
 
   async function getRestaurants() {
+    // console.log("https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING");
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9395989&lng=77.728955&page_type=DESKTOP_WEB_LISTING"
+      REST_URL
     );
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -31,12 +48,14 @@ import userContext from "../utils/userContext";
   //   return <h1>🔴 Offline, please check your internet connection!!</h1>;
   // }
 
-  // not render component (Early return)
-  if (!allRestaurants) return null;
 
-  return allRestaurants?.length === 0 ? (
-    <Shimmer />
-  ) : (
+  // not render component (Early return)
+  if (!allRestaurants) return <Shimmer />;
+
+  // return allRestaurants?.length === 0 ? (
+  //   <Shimmer />
+  // ) : 
+  return (
     <>
       <div className="search-container p-5 bg-pink-50 my-5">
         <input
@@ -71,6 +90,10 @@ import userContext from "../utils/userContext";
             email: e.target.value,
           })
         }></input>
+      </div>
+      <div>
+        {/* hi {location.loaded ? JSON.stringify(location) : "location not available"}
+        hii {location.coordinates.lat} */}
       </div>
       <div className="flex flex-wrap ">
         {/* You have to write logic for NO restraunt fount here */}

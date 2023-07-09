@@ -3,6 +3,7 @@ import Logo from "../assets/foodvilla.png";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 // SPA - Single Page Application???
 // Client Side Routing
@@ -20,6 +21,8 @@ const Header = () => {
 
   const {user} = useContext(userContext);
 
+  const cartItems = useSelector(store => store.cart.items);
+
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-blue-50 md:bg-green-50 lg:bg-pink-50">
       <Title />
@@ -35,10 +38,12 @@ const Header = () => {
           <Link to="/contact">
             <li className="px-2">Contact</li>
           </Link>
-          <li className="px-2">Cart</li>
+        
           <Link to="/instamart">
             <li className="px-2">Instamart</li>
           </Link>
+          <Link to="/cart">
+          <li className="px-2">Cart - {cartItems.length} items</li></Link>
         </ul>
       </div>
       {/* <h1 className="p-10 ml-">{isOnline ? "✅" : "🔴"}</h1>
