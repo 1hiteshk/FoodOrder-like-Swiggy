@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import { useSelector } from "react-redux";
+import store from "../utils/store";
 
 // SPA - Single Page Application???
 // Client Side Routing
@@ -22,6 +23,7 @@ const Header = () => {
   const {user} = useContext(userContext);
 
   const cartItems = useSelector(store => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-blue-50 md:bg-green-50 lg:bg-pink-50">

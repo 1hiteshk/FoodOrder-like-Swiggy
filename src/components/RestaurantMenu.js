@@ -32,7 +32,7 @@ const RestaurantMenu = () => {
         <h3 className="font-bold text-3xl text-center pb-2">Ratings : ⭐ { restaurant?.cards[0]?.card?.card?.info?.avgRating} stars</h3>
         <h3 className="font-bold text-3xl text-center pb-2">{ restaurant?.cards[0]?.card?.card?.info?.costForTwoMsg}</h3>
         
-        
+         
       </div>
       <div className="p-5">
         <h1 className="font-bold text-3xl pl-6">Menu</h1>
@@ -41,11 +41,11 @@ const RestaurantMenu = () => {
             <div className="flex py-2" key={item.id}>** 
               <li key={item.card.info.name} className="mt-[80px] font-semibold">{item?.card?.info?.name} - {} </li>
               <img key={item.card.info.imageId} className="h-40 w-50" src={IMG_CDN_URL + item.card.info.imageId} />
-               <li className="mt-[80px]">{" Rs."} {item.card.info.price /100 || item.card.info.defaultPrice /100} </li>
+               <li key={item.card.info.price} className="mt-[80px]">{" Rs."} {item.card.info.price /100 || item.card.info.defaultPrice /100} </li>
               <button
                 data-testid="addBtn"
                 className="mt-[75px] h-8 px-4 mx-4 w-24 font-medium bg-green-200"
-                onClick={() => addFoodItem(item)}
+                onClick={() => addFoodItem(item?.card?.info)}
               >
                 Add
               </button>

@@ -16,8 +16,8 @@ const Cart = () => {
             <h1 className="font-bold text-3xl">Cart Items - {cartItems.length}</h1>
             <button className="bg-green-100 p-2 m-5" onClick={()=> handleClearCart()}>clearCart</button>
           <div className="flex flex-wrap"> {cartItems.map(item => <FoodItem key={item.id} {...item} />)}
-            <FoodItem {...cartItems[0]} />
             </div> 
+            {/* <FoodItem {...cartItems[0]} /> */} {/* make it work for one then map */}
         </div>
     );
 };
