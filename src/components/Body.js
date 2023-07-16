@@ -42,11 +42,11 @@ console.log(REST_URL);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
-  // const isOnline = useOnline();
+  const isOnline = useOnline();
 
-  // if (!isOnline) {
-  //   return <h1>🔴 Offline, please check your internet connection!!</h1>;
-  // }
+  if (!isOnline) {
+    return <h1>🔴 Offline, please check your internet connection!!</h1>;
+  }
 
 
   // not render component (Early return)
@@ -56,19 +56,20 @@ console.log(REST_URL);
   //   <Shimmer />
   // ) : 
   return (
-    <>
-      <div className="search-container p-5 bg-pink-50 my-5">
-        <input
+    <div className="mx-8">
+      <div className="flex flex-col justify-between items-center md:flex md:flex-row">
+       <div className="text-sm flex gap-2 my-4 items-center">
+       <input
           type="text"
-          className="focus:bg-green-100 p-2 rounded-lg"
-          placeholder="Search"
+          className="w-64 text-xs border border-gray-300 focus:border-yellow-500 transition-all duration-300 px-2 py-2 ml-3 rounded"
+          placeholder="Search for a restaurant"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         />
         <button
-          className="search-btn p-2 m-2 bg-purple-800 text-white rounded-lg hover:bg-green-800 w-18"
+          className="text-xs font-medium shadow-md px-2 py-2 outline-none  rounded bg-yellow-400 hover:bg-yellow-500 transition-all duration-200 ease-in-out text-white"
           onClick={() => {
             //need to filter the data
             const data = filterData(searchText, allRestaurants);
@@ -77,8 +78,10 @@ console.log(REST_URL);
           }}
         >
           Search
-        </button>
-        <input value={user.name} onChange={
+        </button>  
+       </div> 
+
+        {/* <input value={user.name} onChange={
           e => setUser({
             ...user,
             name: e.target.value,
@@ -89,13 +92,15 @@ console.log(REST_URL);
             ...user,
             email: e.target.value,
           })
-        }></input>
+        }></input> */}
+
+        
       </div>
       <div>
         {/* hi {location.loaded ? JSON.stringify(location) : "location not available"}
         hii {location.coordinates.lat} */}
       </div>
-      <div className="flex flex-wrap ">
+      <div className="flex flex-col md:flex-row items-center md:flex-wrap gap-2 my-2 md:my-0 justify-center">
         {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {
           return (
@@ -108,7 +113,7 @@ console.log(REST_URL);
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

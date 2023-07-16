@@ -12,12 +12,15 @@ const Cart = () => {
     };
     
     return(
-        <div>
-            <h1 className="font-bold text-3xl">Cart Items - {cartItems.length}</h1>
-            <button className="bg-green-100 p-2 m-5" onClick={()=> handleClearCart()}>clearCart</button>
-          <div className="flex flex-wrap"> {cartItems.map(item => <FoodItem key={item.id} {...item} />)}
+        <div className="md:w-3/5 w-[80%]  m-auto py-4 min-h-screen ">
+             <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-semibold">Cart Items - {cartItems.length}</h1>
+            <button className="text-xs font-medium bg-red-300 py-1 px-2 hover:bg-red-400 transition-all duration-300 ease-in-out rounded" onClick={()=> handleClearCart()}>clearCart</button>
+            </div>
+          <div className="flex flex-col"> {cartItems.map(item => <FoodItem key={item.id} {...item} />)}
             </div> 
             {/* <FoodItem {...cartItems[0]} /> */} {/* make it work for one then map */}
+        
         </div>
     );
 };

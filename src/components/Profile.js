@@ -18,7 +18,7 @@ const Profile = (props) => {
   console.log("render");
 
   return (
-    <div>
+    <div className="">
       <h2>Porofile Component</h2>
       <h3>Name: {props.name}</h3>
       <h3>Count: {count}</h3>

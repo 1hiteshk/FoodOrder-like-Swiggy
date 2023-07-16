@@ -3,65 +3,39 @@ import React from "react";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    // Create State
     this.state = {
       userInfo: {
-        name: "Dummy Name",
+        login: "Dummy Name",
         location: "Dummy Location",
+        avatar_url: ""
       },
     };
-    //console.log("Child - Constructor" + this.props.name);
   }
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      console.log("NAMASTE REACT OP ");
-    }, 1000);
-
-    //console.log("Child - componentDidMount");
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.count !== prevState.count) {
-      //
-    }
-    if (this.state.count2 !== prevState.count2) {
-      // code
-    }
-    console.log("Component Did Update");
-  }
-  componentWillUnmount() {
-    clearInterval(this.timer);
-    //console.log("ComponentWillUnmount");
+  async componentDidMount() {
+    const response = await fetch("https://api.github.com/users/1hiteshk"); 
+    const json = await response.json();
+    this.setState({
+      userInfo: {
+        login: json.login,
+        location: json.location,
+        avatar_url: json.avatar_url
+      }
+    });
   }
 
   render() {
-    const { count } = this.state;
-    //console.log("Child - render" + this.props.name);
+    const { login, location, avatar_url } = this.state.userInfo;
+
     return (
-      <div>
-        <h1> Profile Class Component </h1>
-        <img src={this.state.userInfo.avatar_url} />
-        <h2>Name: {this.state.userInfo.name}</h2>
-        <h2>Location: {this.state.userInfo.location}</h2>
+      <div className="justify-center flex ">
+      
+        <img className="h-[200px] w-[200px] rounded justify-center flex" src={avatar_url} alt="User Avatar" />
+        {/* <h3>User id: {login}</h3>
+        <h2>Location: {location}</h2> */}
       </div>
     );
   }
 }
-
-/**
- *
- *  child constructor
- *  child render
- *  child componentDidMount
- *
- *  API call
- *  Set State
- *
- *  <UPDATE CYCLES>
- *  render
- *
- *
- */
 
 export default Profile;
