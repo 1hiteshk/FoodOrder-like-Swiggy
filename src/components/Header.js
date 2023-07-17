@@ -32,8 +32,8 @@ const Header = () => {
       <Title />
       <ul className="flex gap-6 md:gap-12 text-sm font-medium">
 
-     <li> <input  type="text"
-          className="w-64 h-6 text-md text-black border-b-2  border-gray-900 bg-white focus:bg-[#fd9133]  transition-all duration-300 px-2 rounded"
+     {/* <li> <input  type="text"
+          className="lg:w-64 md:w-50  h-6 text-md text-black border-b-2  border-gray-900 bg-white focus:bg-[#fd9133]  transition-all duration-300 px-2 rounded"
           placeholder="your location"
           value={city}
           onChange={(e) => {
@@ -41,8 +41,6 @@ const Header = () => {
           }}
        />
        </li>
-    
-
     
       <svg 
         xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +51,7 @@ const Header = () => {
           fill-rule="evenodd"
           d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
           clip-rule="evenodd" />
-      </svg>
+      </svg> */}
   
   
 

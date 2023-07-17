@@ -8,11 +8,6 @@ import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 
-// export const location = useGeoLocation();
-// export const lat = location.coordinates.lat;
-// export const lng = location.coordinates.lng;
-
-
 
   const Body = ({/*user*/}) => {
   const [allRestaurants, setAllRestaurants] = useState([]);

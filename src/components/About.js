@@ -23,9 +23,9 @@ class About extends Component {
         About Me
         </span>
 
-        <userContext.Consumer>
+        {/* <userContext.Consumer>
           {({user}) => <h4 className="font-bold p-10">{user.name}-{user.email}</h4>}
-        </userContext.Consumer>
+        </userContext.Consumer> */}
 
         <Profile />
         <p className="m-3 font-bold text-gray-600 justify-center">  Frontend Developer who is passionate about developing web apps from scratch using modern tools & technology's seeking & open for opportunity, Eager to Leverage Skills and Drive Innovation.</p>
