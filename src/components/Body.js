@@ -15,24 +15,32 @@ import useGeoLocation from "./useGeoLocation";
   const [searchText, setSearchText] = useState("");
   const {user,setUser} = useContext(userContext);
   const location = useGeoLocation();
-  const lat = location.coordinates.lat;
-  const lng = location.coordinates.lng;
-  console.log("hitu" , lng);
+  
+  let lat = location?.coordinates?.lat;
+  let lng = location?.coordinates?.lng;
+  
+   if(!location?.coordinates?.lat){ lat =12.971599 ;}
+   if(!location?.coordinates?.lng){ lng =77.594566  ; }
+   if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ;}
+   if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}
+   //console.log("useeffect k bahar chla",lat,lng);
   const REST_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
 
-console.log(REST_URL);
+//console.log(REST_URL);
   
-
-  
-  useEffect(() => {
+  useEffect(() => { 
+    if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ; }
+    if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}
     getRestaurants();
-  }, [REST_URL]);
+  }, [lat,lng]);
 
   async function getRestaurants() {
+   
     // console.log("https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING");
     const data = await fetch(
-      REST_URL
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
     );
+    // console.log("api call bani useEffect me", lat,lng);
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);

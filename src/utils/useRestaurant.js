@@ -5,8 +5,12 @@ import useGeoLocation from "../components/useGeoLocation";
 const useRestaurant = (resId) => {
   const [restaurant, setRestauraunt] = useState(null);
   const location = useGeoLocation();
-  const lat = location.coordinates.lat;
-  const lng = location.coordinates.lng;
+  let lat = 12.971599;
+  let lng= 77.594566;
+   lat = location?.coordinates?.lat;
+   lng = location?.coordinates?.lng;
+   if(!location?.coordinates?.lat){ lat =12.971599 }
+   if(!location?.coordinates?.lng){ lng =77.594566}
 
   const FETCH_MENU_URL = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat="+lat+"&lng="+lng+"&restaurantId="
 console.log(FETCH_MENU_URL);
