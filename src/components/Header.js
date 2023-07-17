@@ -67,16 +67,21 @@ const Header = () => {
             <li>Instamart</li>
           </Link>
           <li><Link to="/cart" className="relative "><i className="fa-solid fa-cart-shopping"><span className="absolute top-[-8px] right-[-12px] bg-white text-yellow-400 w-4 p-1  h-4 rounded-full text-[10px] flex justify-center items-center" data-testid="cart">{cartItems.length}</span></i></Link></li>
+
+<li>
+{isLoggedIn ? (
+        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+      ) : (
+        <button onClick={() => setIsLoggedIn(true)}>Login</button>
+      )}
+</li>
+
       </ul>
       {/* <ul>
         <li>{isOnline ? "✅" : "🔴"}</li>
         {/* <li className="font-bold text-purple-900">{user.name}</li> *
       </ul> */}
-      {isLoggedIn ? (
-        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
-      ) : (
-        <button onClick={() => setIsLoggedIn(true)}>Login</button>
-      )}
+      
     </div>
   );
 };

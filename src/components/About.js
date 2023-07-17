@@ -18,7 +18,7 @@ class About extends Component {
   render() {
     //console.log("Parent - render");
     return (
-      <div className="w-[100vh]  m-5 border border-black border-2px shadow-2xl justify-center mx-auto m">
+      <div className="md:w-[100vh] sm:w-[100vw]  m-5 border border-black border-2px shadow-2xl justify-center mx-auto m">
         <span className="text-4xl font-bold m-4 justify-center flex underline">
         About Me
         </span>
