@@ -113,3 +113,4 @@ console.log(REST_URL);
 };
 
 export default Body;
+// export {lat,lng};
