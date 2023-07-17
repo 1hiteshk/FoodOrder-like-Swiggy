@@ -12,7 +12,7 @@ const useRestaurant = (resId) => {
    if(!location?.coordinates?.lat){ lat =12.971599 }
    if(!location?.coordinates?.lng){ lng =77.594566}
 
-  const FETCH_MENU_URL = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat="+lat+"&lng="+lng+"&restaurantId="
+  const FETCH_MENU_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat="+lat+"&lng="+lng+"&restaurantId="
 console.log(FETCH_MENU_URL);
 
   useEffect(() => {

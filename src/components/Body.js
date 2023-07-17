@@ -38,7 +38,7 @@ import useGeoLocation from "./useGeoLocation";
    
     // console.log("https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING");
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
     );
     // console.log("api call bani useEffect me", lat,lng);
     const json = await data.json();
