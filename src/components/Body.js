@@ -8,43 +8,48 @@ import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 
-
   const Body = ({/*user*/}) => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const {user,setUser} = useContext(userContext);
-  const location = useGeoLocation();
-  
-  let lat = location?.coordinates?.lat;
-  let lng = location?.coordinates?.lng;
-  
-   if(!location?.coordinates?.lat){ lat =12.971599 ;}
-   if(!location?.coordinates?.lng){ lng =77.594566  ; }
-   if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ;}
-   if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}
-   //console.log("useeffect k bahar chla",lat,lng);
-  const REST_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
 
-//console.log(REST_URL);
+// const location = useGeoLocation();
+
+  const [latitude, setLatitude] = useState(12.971599);
+  const [longitude, setLongitude] = useState(77.594566);
+
+  //  if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ;}12.971599
+  //  if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}77.594566
+  navigator.geolocation.getCurrentPosition((position) => {
+    getLocation(position);
+  })
+  async function getLocation(position) {
+     setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+      console.log("inside useeffect 1",latitude,longitude);
+  }
+  
+  const REST_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat="+latitude+"&lng="+longitude+"&page_type=DESKTOP_WEB_LISTING"
   
   useEffect(() => { 
-    if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ; }
-    if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}
-    getRestaurants();
-  }, [lat,lng]);
+
+  getRestaurants();
+  }, [getLocation]);
+
+  
 
   async function getRestaurants() {
-   
-    // console.log("https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING");
+    
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat="+lat+"&lng="+lng+"&page_type=DESKTOP_WEB_LISTING"
+      REST_URL
     );
     // console.log("api call bani useEffect me", lat,lng);
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
+
   const isOnline = useOnline();
 
   if (!isOnline) {
@@ -121,4 +126,3 @@ import useGeoLocation from "./useGeoLocation";
 };
 
 export default Body;
-// export {lat,lng};

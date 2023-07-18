@@ -36,5 +36,4 @@ const useGeoLocation = () => {
    return location;
   };
 
-  
   export default useGeoLocation;
