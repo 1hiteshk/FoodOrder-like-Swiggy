@@ -57,7 +57,7 @@ const Instamart = () => {
         isVisible={visibleSection == "team"}
         setIsVisible={(display) =>{
           if(display){
-            console.log(display);
+            // console.log(display);
             setIsVisibleSection("team");
           } else{
             setIsVisibleSection("");

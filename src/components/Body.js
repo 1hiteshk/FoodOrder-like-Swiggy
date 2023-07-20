@@ -8,42 +8,49 @@ import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 
-  const Body = ({/*user*/}) => {
+const Body = (
+  {
+    /*user*/
+  }
+) => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const {user,setUser} = useContext(userContext);
-
-// const location = useGeoLocation();
-
-  const [latitude, setLatitude] = useState(12.971599);
-  const [longitude, setLongitude] = useState(77.594566);
-
-  //  if(location?.coordinates?.lat){ lat=location?.coordinates?.lat ;}12.971599
-  //  if(location?.coordinates?.lng){ lng =location?.coordinates?.lng ;}77.594566
-  navigator.geolocation.getCurrentPosition((position) => {
-    getLocation(position);
+  const { user, setUser } = useContext(userContext);
+  const [geolocation, setGeoLocation] = useState({
+    latitude: 12.971599,
+    longitude: 77.594566,
   })
-  async function getLocation(position) {
-     setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-      console.log("inside useeffect 1",latitude,longitude);
-  }
-  
-  const REST_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat="+latitude+"&lng="+longitude+"&page_type=DESKTOP_WEB_LISTING"
-  
-  useEffect(() => { 
+  // const [latitude, setLatitude] = useState(12.971599);
+  // const [longitude, setLongitude] = useState(77.594566);
 
-  getRestaurants();
-  }, [getLocation]);
+  useEffect(() => {
+    getGeoLocationData();
+  },[])
 
-  
+  const getGeoLocationData = () => {
+    const position = navigator.geolocation.getCurrentPosition((pos) =>{
+      setLocation(pos);
+      // localStorage.setItem("coordinates data : ",pos.coords);
+      console.log(pos)
+    });
+  }; 
 
-  async function getRestaurants() {
-    
-    const data = await fetch(
-      REST_URL
-    );
+  useEffect(() => {
+    getRestaurants();
+  }, [getGeoLocationData]);
+
+   
+  const setLocation = (position) => {
+    setGeoLocation ({
+      latitude: position.coords.latitude,
+      longitude: `${position.coords.longitude}`,
+    })
+  };
+
+  const getRestaurants = async() => {
+    const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.latitude}&lng=${geolocation.longitude}&page_type=DESKTOP_WEB_LISTING`;
+    const data = await fetch(REST_URL);
     // console.log("api call bani useEffect me", lat,lng);
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
@@ -56,38 +63,46 @@ import useGeoLocation from "./useGeoLocation";
     return <h1>🔴 Offline, please check your internet connection!!</h1>;
   }
 
-
   // not render component (Early return)
   if (!allRestaurants) return <Shimmer />;
 
   // return allRestaurants?.length === 0 ? (
   //   <Shimmer />
-  // ) : 
+  // ) :
   return (
     <div className="mx-8">
       <div className="flex flex-col justify-between items-center md:flex md:flex-row">
-       <div className="text-sm flex gap-2 my-4 items-center">
-       <input
-          type="text"
-          className="w-64 text-xs border border-gray-300 focus:border-yellow-500 transition-all duration-300 px-2 py-2 ml-3 rounded"
-          placeholder="Search for a restaurant"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        />
-        <button
-          className="text-xs font-medium shadow-md px-2 py-2 outline-none  rounded bg-yellow-400 hover:bg-yellow-500 transition-all duration-200 ease-in-out text-white"
-          onClick={() => {
-            //need to filter the data
-            const data = filterData(searchText, allRestaurants);
-            // update the state - restaurants
-            setFilteredRestaurants(data);
-          }}
-        >
-          Search
-        </button>  
-       </div> 
+        <div className="text-sm flex gap-2 my-4 items-center">
+          <input
+            type="text"
+            className="w-64 text-xs border border-gray-300 focus:border-yellow-500 transition-all duration-300 px-2 py-2 ml-3 rounded"
+            placeholder="Search for a restaurant"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="text-xs font-medium shadow-md px-2 py-2 outline-none  rounded bg-yellow-400 hover:bg-yellow-500 transition-all duration-200 ease-in-out text-white"
+            onClick={() => {
+              //need to filter the data
+              const filteredRestaurant = allRestaurants.filter(
+                (res) =>
+                  res?.data?.name
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase()) ||
+                  res?.data?.cuisines
+                    .join(", ")
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
+              );
+              // update the state - restaurants
+              setFilteredRestaurants(filteredRestaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
 
         {/* <input value={user.name} onChange={
           e => setUser({
@@ -101,8 +116,6 @@ import useGeoLocation from "./useGeoLocation";
             email: e.target.value,
           })
         }></input> */}
-
-        
       </div>
       <div>
         {/* hi {location.loaded ? JSON.stringify(location) : "location not available"}
@@ -116,7 +129,7 @@ import useGeoLocation from "./useGeoLocation";
               to={"/restaurant/" + restaurant.data.id}
               key={restaurant.data.id}
             >
-              <RestaurantCard {...restaurant.data}  user={user}/>
+              <RestaurantCard {...restaurant.data} user={user} />
             </Link>
           );
         })}

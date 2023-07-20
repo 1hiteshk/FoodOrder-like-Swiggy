@@ -12,7 +12,7 @@ import store from "../utils/store";
 
 const Title = () => (
   <a href="/">
-    <img className="h-20 " alt="logo" src={chef} />
+    <img className="h-10 w-10 md:w-12 md:h-12  lg:h-20 lg:w-20" alt="logo" src={chef} />
   </a>
 );
 

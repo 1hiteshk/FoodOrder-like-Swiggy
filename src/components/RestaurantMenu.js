@@ -67,7 +67,7 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[0]?.card?.card?.info?.sla?.slaString}
+            {restaurant?.cards[0]?.card?.card?.info?.sla?.slaString}..
           </span>
           </div>
           <div className="flex items-center gap-2 font-semibold">
