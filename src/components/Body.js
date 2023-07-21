@@ -38,7 +38,7 @@ const Body = (
 
   useEffect(() => {
     getRestaurants();
-  }, [getGeoLocationData]);
+  }, [geolocation]);
 
    
   const setLocation = (position) => {
@@ -51,7 +51,7 @@ const Body = (
   const getRestaurants = async() => {
     const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.latitude}&lng=${geolocation.longitude}&page_type=DESKTOP_WEB_LISTING`;
     const data = await fetch(REST_URL);
-    // console.log("api call bani useEffect me", lat,lng);
+    // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
