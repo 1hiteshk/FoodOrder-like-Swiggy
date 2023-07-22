@@ -12,7 +12,7 @@ import store from "../utils/store";
 
 const Title = () => (
   <a href="/">
-    <img className="h-10 w-10 md:w-12 md:h-12  lg:h-20 lg:w-20" alt="logo" src={chef} />
+    <img className="h-14 w-14 -ml-1 md:w-14 md:h-14  lg:h-20 lg:w-20" alt="logo" src={chef} />
   </a>
 );
 
@@ -28,7 +28,7 @@ const Header = () => {
   // console.log(cartItems);
 
   return (
-    <div className="flex justify-between items-center px-6 md:px-8 py-2 shadow bg-[#fd9133] text-white">
+    <div className="fixed relative w-full flex justify-between items-center px-6 md:px-8 py-2 shadow bg-[#fd9133] text-white">
       <Title />
       <ul className="flex gap-6 md:gap-12 text-sm font-medium">
 

@@ -8,7 +8,7 @@ import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 
-const getDataFromLS = () => {
+export const getDataFromLS = () => {
     const data = localStorage.getItem('coords');
     if(data){
         return JSON.parse(data);
@@ -82,7 +82,7 @@ const Body = (
   //   <Shimmer />
   // ) :
   return (
-    <div className="mx-8">
+    <div className="mx-8 relative">
       <div className="flex flex-col justify-between items-center md:flex md:flex-row">
         <div className="text-sm flex gap-2 my-4 items-center">
           <input

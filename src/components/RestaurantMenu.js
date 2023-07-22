@@ -17,11 +17,13 @@ const RestaurantMenu = () => {
     // console.log(restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card)
 
     const categories =
-    restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    restaurant?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c.card?.["card"]?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
+    // console.log(restaurant?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards,"1");
+    // console.log(categories);
 
 
   if (!restaurant) return <Shimmer />

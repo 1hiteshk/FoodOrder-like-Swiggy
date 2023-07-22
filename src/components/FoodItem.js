@@ -3,6 +3,7 @@ import { IMG_CDN_URL } from "../constants";
 const FoodItem = ({
   name,
   description,
+  category,
   imageId,
   price,
   defaultPrice,
@@ -12,7 +13,7 @@ const FoodItem = ({
       <img className="w-32 h-20 rounded object-cover" src={IMG_CDN_URL + imageId} />
       <div className="flex flex-col">
       <h2 className="font-bold text-xl">{name}</h2>
-      <h3 className="text-gray-500">{description}</h3>
+      <h3 className="text-gray-500">{/*category*/} {description}</h3>
       <h4 className="font-bold">Rupees : ₹{price / 100 || defaultPrice/100 } </h4>
       </div>
      
