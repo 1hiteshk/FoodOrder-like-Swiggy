@@ -33,11 +33,11 @@ const AppLayout = () => {
   return (
     <>
       <Provider store={store}>
-      <userContext.Provider value={{ user: user, setUser: setUser }}>
-        <Header />
-        <Outlet />
-        <Footer />
-      </userContext.Provider>
+        <userContext.Provider value={{ user: user, setUser: setUser }}>
+          <Header />
+          <Outlet />
+          <Footer />
+        </userContext.Provider>
       </Provider>
     </>
   );
@@ -51,7 +51,9 @@ const appRouter = createBrowserRouter([
       {
         path: "/about", // parentPath/{path} => localhost:1244/about
         element: (
-          <Suspense fallback={<h1>Loading....</h1>}>
+          <Suspense
+            fallback={<h1 className="p-4 items-center">Loading....</h1>}
+          >
             <About />
           </Suspense>
         ),

@@ -49,7 +49,7 @@ const Body = (
     const position = navigator.geolocation.getCurrentPosition((pos) => {
       setLocation(pos);
       // localStorage.setItem("coordinates data : ",pos.coords);
-      console.log(pos);
+      // console.log(pos);
     });
   };
 
@@ -74,15 +74,15 @@ const Body = (
   if (!isOnline) {
     return <h1>🔴 Offline, please check your internet connection!!</h1>;
   }
-
+  
   // not render component (Early return)
-  if (!allRestaurants) return <Shimmer />;
+  if (allRestaurants?.length === 0) return <Shimmer />;
 
   // return allRestaurants?.length === 0 ? (
   //   <Shimmer />
   // ) :
   return (
-    <div className="mx-8 relative">
+    <div className="mx-8 ">
       <div className="flex flex-col justify-between items-center md:flex md:flex-row">
         <div className="text-sm flex gap-2 my-4 items-center">
           <input
@@ -116,6 +116,7 @@ const Body = (
           </button>
         </div>
 
+
         {/* <input value={user.name} onChange={
           e => setUser({
             ...user,
@@ -135,7 +136,7 @@ const Body = (
       </div>
       <div className="flex flex-col md:flex-row items-center md:flex-wrap gap-2 my-2 md:my-0 justify-center">
         {/* You have to write logic for NO restraunt fount here */}
-        {filteredRestaurants.map((restaurant) => {
+        {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.data.id}
