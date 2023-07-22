@@ -10,7 +10,7 @@ import store from "../utils/store";
 const Title = () => (
   <a href="/">
     <img
-      className="h-14 w-14 -ml-1 md:w-14 md:h-14  lg:h-20 lg:w-20"
+      className="h-14 w-14  md:w-14 md:h-14  lg:h-20 lg:w-20"
       alt="logo"
       src={chef}
     />
@@ -29,9 +29,9 @@ const Header = () => {
   // console.log(cartItems);
 
   return (
-    <div className="sticky z-50 top-0 w-full flex justify-between items-center px-6 md:px-8 py-1 shadow bg-[#fd9133] text-white">
+    <div className="sticky z-50 top-0 w-full flex justify-between items-center px-2 lg:px-6 md:px-8 py-1 shadow bg-[#fd9133] text-white">
       <Title />
-      <ul className="flex gap-6 md:gap-12 text-sm font-medium">
+      <ul className="flex gap-5 lg:gap-6 md:gap-12 text-sm font-medium">
         {/* <li> <input  type="text"
           className="lg:w-64 md:w-50  h-6 text-md text-black border-b-2  border-gray-900 bg-white focus:bg-[#fd9133]  transition-all duration-300 px-2 rounded"
           placeholder="your location"
