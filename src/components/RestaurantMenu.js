@@ -9,13 +9,23 @@ import { useDispatch } from "react-redux";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const restaurant = useRestaurant(resId);
+  const [showIndex, setShowIndex] = useState(0);
   const dispatch = useDispatch();
 
   const addFoodItem = (item) => {
     dispatch(addItem(item));
   };
 
-  // const {itemCards} = restaurant.cards[3].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
+  const itemCards =
+    restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+
+    const categories =
+    restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.["card"]?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
 
   if (!restaurant) return <Shimmer />
 
@@ -109,7 +119,7 @@ const RestaurantMenu = () => {
        
       
       
-        <div className="">
+        {/* <div className="">
           {restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map((item) => {
             return (
               <div  className="flex flex-col justify-between border-b pb-6 mb-4 gap-6 md:flex-row"
@@ -143,7 +153,7 @@ const RestaurantMenu = () => {
             );
           
 })}
-        </div>
+        </div> */}
       
     </div>
   );

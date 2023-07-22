@@ -8,6 +8,21 @@ import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 
+const getDataFromLS = () => {
+    const data = localStorage.getItem('coords');
+    if(data){
+        return JSON.parse(data);
+    }
+    else{
+        return (
+            {
+                latitude: 12.971599,
+                longitude: 77.594566,
+              }
+        )
+    }
+}
+
 const Body = (
   {
     /*user*/
@@ -17,45 +32,42 @@ const Body = (
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const { user, setUser } = useContext(userContext);
-  const [geolocation, setGeoLocation] = useState({
-    latitude: 12.971599,
-    longitude: 77.594566,
-  })
+  const [geolocation, setGeoLocation] = useState(getDataFromLS());
   // const [latitude, setLatitude] = useState(12.971599);
   // const [longitude, setLongitude] = useState(77.594566);
 
   useEffect(() => {
     getGeoLocationData();
-  },[])
-
-  const getGeoLocationData = () => {
-    const position = navigator.geolocation.getCurrentPosition((pos) =>{
-      setLocation(pos);
-      // localStorage.setItem("coordinates data : ",pos.coords);
-      console.log(pos)
-    });
-  }; 
+  }, []);
 
   useEffect(() => {
+    localStorage.setItem('coords' ,JSON.stringify(geolocation))
     getRestaurants();
   }, [geolocation]);
 
-   
-  const setLocation = (position) => {
-    setGeoLocation ({
-      latitude: position.coords.latitude,
-      longitude: `${position.coords.longitude}`,
-    })
+  const getGeoLocationData = () => {
+    const position = navigator.geolocation.getCurrentPosition((pos) => {
+      setLocation(pos);
+      // localStorage.setItem("coordinates data : ",pos.coords);
+      console.log(pos);
+    });
   };
 
-  const getRestaurants = async() => {
+  const setLocation = (position) => {
+    setGeoLocation({
+      latitude: position.coords.latitude,
+      longitude: `${position.coords.longitude}`,
+    });
+  };
+
+  const getRestaurants = async () => {
     const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.latitude}&lng=${geolocation.longitude}&page_type=DESKTOP_WEB_LISTING`;
     const data = await fetch(REST_URL);
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-  }
+  };
 
   const isOnline = useOnline();
 
