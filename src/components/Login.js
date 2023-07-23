@@ -37,7 +37,7 @@ const schema = Yup.object().shape({
         localStorage.setItem("token", genRandomStringNthChar());
         navigate(-1);
       }, 0);
-    }
+    };
   
     if(token?.length === 100) return null;
   
