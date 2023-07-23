@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import chef from "../assets/chef.png";
-import foodvilla from "../assets/foodvilla.png";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
@@ -18,7 +18,13 @@ const Title = () => (
 );
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+   // use useState for user logged in or logged out
+   const [isLoggedin, setIsLoggedin] = useState(
+    token?.length === 100 ? true : false
+  );
+  const navigate = useNavigate();
+
   const [city, setCity] = useState("");
 
   const isOnline = useOnline();
@@ -86,11 +92,23 @@ const Header = () => {
         </li>
 
         <li>
-          {isLoggedIn ? (
-            <button onClick={() => setIsLoggedIn(false)}>Logout</button>
-          ) : (
-            <button onClick={() => setIsLoggedIn(true)}>Login</button>
-          )}
+          {/* use conditional rendering for login and logout */}
+            {isLoggedin ? (
+              <button
+                className="logout-btn"
+                onClick={() => {
+                  localStorage.removeItem('token');
+                  setIsLoggedin(!isLoggedin);
+                }}
+              >
+                Logout
+              </button>
+            ) : (
+              <button className="login-btn" onClick={() => {navigate("/login")
+              setIsLoggedin(!isLoggedin)}}>
+                login
+              </button>
+            )}
         </li>
       </ul>
       {/* <ul>

@@ -33,8 +33,6 @@ const Body = (
   const [searchText, setSearchText] = useState("");
   const { user, setUser } = useContext(userContext);
   const [geolocation, setGeoLocation] = useState(getDataFromLS());
-  // const [latitude, setLatitude] = useState(12.971599);
-  // const [longitude, setLongitude] = useState(77.594566);
 
   useEffect(() => {
     getGeoLocationData();
@@ -88,7 +86,7 @@ const Body = (
           <input
             type="text"
             className="w-64 text-xs border border-gray-300 focus:border-yellow-500 transition-all duration-300 px-2 py-2 ml-3 rounded"
-            placeholder="Search for a restaurant"
+            placeholder="Search for restaurants & food"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
