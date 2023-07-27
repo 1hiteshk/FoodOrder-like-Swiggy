@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 // import { FETCH_MENU_URL } from "../constants";
 import useGeoLocation from "../components/useGeoLocation";
-import { getDataFromLS } from "../components/Body";
 
 const useRestaurant = (resId) => {
   const [restaurant, setRestauraunt] = useState(null);
-  const [coord, setCoord] = useState(getDataFromLS());
-  console.log(coord);
   // const location = useGeoLocation();
   // let lat = 12.971599;
   // let lng= 77.594566;
@@ -19,7 +16,7 @@ const useRestaurant = (resId) => {
 
   useEffect(() => {
     getRestaurantInfo();
-  }, [coord]);
+  }, []);
 
   async function getRestaurantInfo() {
     const FETCH_MENU_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=`;

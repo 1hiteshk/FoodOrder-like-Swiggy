@@ -104,7 +104,8 @@ const Header = () => {
               </button>
             ) : (
               <button className="login-btn" onClick={() => {navigate("/login")
-              setIsLoggedin(!isLoggedin)}}>
+              setIsLoggedin(!isLoggedin)
+              }}>
                 login
               </button>
             )}

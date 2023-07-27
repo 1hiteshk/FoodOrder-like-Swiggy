@@ -9,21 +9,6 @@ import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
 import { current } from "@reduxjs/toolkit";
 
-export const getDataFromLS = () => {
-    const data = localStorage.getItem('coords');
-    if(data){
-        return JSON.parse(data);
-    }
-    else{
-        return (
-            {
-                latitude: 12.971599,
-                longitude: 77.594566,
-              }
-        )
-    }
-}
-
 const Body = (
   {
     /*user*/
@@ -33,39 +18,24 @@ const Body = (
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const { user, setUser } = useContext(userContext);
-  const [geolocation, setGeoLocation] = useState(getDataFromLS());
+  const [geolocation, setGeoLocation] = useState();
 
   useEffect(() => {
-    getGeoLocationData();
+    
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('coords' ,JSON.stringify(geolocation))
+    
     getRestaurants();
-  }, [geolocation]);
-
-  const getGeoLocationData = () => {
-    const position = navigator.geolocation.getCurrentPosition((pos) => {
-      setLocation(pos);
-      // localStorage.setItem("coordinates data : ",pos.coords);
-      // console.log(pos);
-    });
-  };
-
-  const setLocation = (position) => {
-    setGeoLocation({
-      latitude: position.coords.latitude,
-      longitude: `${position.coords.longitude}`,
-    });
-  };
+  }, [])
 
   const getRestaurants = async () => {
-    console.log(geolocation.latitude)
-    const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING`;
+    const REST_URL = window.innerWidth >= 480 ? `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING` : `https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING`;
     const data = await fetch(REST_URL);
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
-    setAllRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants );
+    console.log(allRestaurants)
     setFilteredRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
@@ -142,7 +112,7 @@ const Body = (
               to={"/restaurant/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard {...restaurant.info} user={user} />
+              <RestaurantCard resData={restaurant.info} user={user} />
             </Link>
           );
         })}

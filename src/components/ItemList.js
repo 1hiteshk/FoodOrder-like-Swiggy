@@ -8,7 +8,16 @@ const ItemList = ({items}) => {
     const dispatch = useDispatch();
 
     const addFoodItem = (item) => {
-      dispatch(addItem(item));
+      console.log(item)
+      dispatch(addItem({
+        name: item.name,
+        price: item.price || item.defaultPrice,
+        imageId: item?.imageId,
+        quantity: item.inStock,
+        id: item?.id,
+        description: item?.description,
+        category:item?.category
+      }));
     };
     
     return(
