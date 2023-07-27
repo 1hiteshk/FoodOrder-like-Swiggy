@@ -22,7 +22,7 @@ const useRestaurant = (resId) => {
   }, [coord]);
 
   async function getRestaurantInfo() {
-    const FETCH_MENU_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${coord.latitude}&lng=${coord.longitude}&restaurantId=`;
+    const FETCH_MENU_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=`;
 
     const data = await fetch(FETCH_MENU_URL + resId);
     const json = await data.json();

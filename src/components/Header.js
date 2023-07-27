@@ -59,27 +59,26 @@ const Header = () => {
           clip-rule="evenodd" />
       </svg> */}
 
-        <li className=" hover:text-orange-900 hover:bg-gray-200 hover:rounded px-1  transition-all duration-300 ease-in-out">
-          <Link to="/" className="">
-            Home
+      <Link to="/" className=" hover:text-orange-900 hover:bg-gray-200 hover:rounded px-1  transition-all duration-300 ease-in-out">
+            <li>Home</li>
           </Link>
-        </li>
+        
 
-        <Link
+      <Link
           to="/about"
           className=" hover:text-orange-900 hover:bg-gray-200 hover:rounded px-1  transition-all duration-300 ease-in-out"
         >
           <li>About</li>
         </Link>
 
-        <Link
+      <Link
           to="/instamart"
           className=" hover:text-orange-900 hover:bg-gray-200 hover:rounded px-1  transition-all duration-300 ease-in-out"
         >
           <li>Instamart</li>
-        </Link>
-        <li>
-          <Link to="/cart" className="relative ">
+      </Link>
+      <li>
+        <Link to="/cart" className="relative ">
             <i className="fa-solid fa-cart-shopping">
               <span
                 className="absolute top-[-8px] right-[-12px] bg-white text-yellow-400 w-4 p-1  h-4 rounded-full text-[10px] flex justify-center items-center"

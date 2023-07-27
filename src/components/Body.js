@@ -7,6 +7,7 @@ import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
 import useGeoLocation from "./useGeoLocation";
+import { current } from "@reduxjs/toolkit";
 
 export const getDataFromLS = () => {
     const data = localStorage.getItem('coords');
@@ -59,12 +60,13 @@ const Body = (
   };
 
   const getRestaurants = async () => {
-    const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.latitude}&lng=${geolocation.longitude}&page_type=DESKTOP_WEB_LISTING`;
+    console.log(geolocation.latitude)
+    const REST_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING`;
     const data = await fetch(REST_URL);
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setAllRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   const isOnline = useOnline();
@@ -98,10 +100,10 @@ const Body = (
               //need to filter the data
               const filteredRestaurant = allRestaurants.filter(
                 (res) =>
-                  res?.data?.name
+                  res?.info?.name
                     .toLowerCase()
                     .includes(searchText.toLowerCase()) ||
-                  res?.data?.cuisines
+                  res?.info?.cuisines
                     .join(", ")
                     .toLowerCase()
                     .includes(searchText.toLowerCase())
@@ -137,10 +139,10 @@ const Body = (
         {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
-              to={"/restaurant/" + restaurant.data.id}
-              key={restaurant.data.id}
+              to={"/restaurant/" + restaurant.info.id}
+              key={restaurant.info.id}
             >
-              <RestaurantCard {...restaurant.data} user={user} />
+              <RestaurantCard {...restaurant.info} user={user} />
             </Link>
           );
         })}
