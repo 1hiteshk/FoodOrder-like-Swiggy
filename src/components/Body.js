@@ -1,4 +1,4 @@
-import { restaurantList } from "../constants";
+import constants, { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
@@ -20,23 +20,32 @@ const Body = (
   const { user, setUser } = useContext(userContext);
   const [geolocation, setGeoLocation] = useState();
 
-  useEffect(() => {
-    
-  }, []);
+  const DATA_LINKS = constants();
+  const FETCH_SWIGGY_DAPI = DATA_LINKS.SWIGGY_DAPI;
+  const FETCH_SWIGGY_MAPI = DATA_LINKS.SWIGGY_MAPI;
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    
     getRestaurants();
-  }, [])
+  }, [FETCH_SWIGGY_DAPI]);
 
   const getRestaurants = async () => {
-    const REST_URL = window.innerWidth >= 480 ? `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING` : `https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING`;
+    const REST_URL =
+      (window.innerWidth >= 480
+        ? ( FETCH_SWIGGY_DAPI )
+        : ( FETCH_SWIGGY_MAPI)
+      );
     const data = await fetch(REST_URL);
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
-    setAllRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants );
-    console.log(allRestaurants)
-    setFilteredRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    console.log(allRestaurants);
+    setFilteredRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   const isOnline = useOnline();
@@ -44,7 +53,7 @@ const Body = (
   if (!isOnline) {
     return <h1>🔴 Offline, please check your internet connection!!</h1>;
   }
-  
+
   // not render component (Early return)
   if (allRestaurants?.length === 0) return <Shimmer />;
 
@@ -85,7 +94,6 @@ const Body = (
             Search
           </button>
         </div>
-
 
         {/* <input value={user.name} onChange={
           e => setUser({

@@ -1,5 +1,45 @@
 // import { lat, lng } from "./components/Body";
 
+import { useEffect, useState } from "react";
+
+const constants = () => {
+    
+const [geolocation, setGeolocation] = useState({
+    lat: 12.971599, 
+    lng: 77.594566,
+  })
+
+  useEffect(() => {
+    getGeoLocationData();
+  }, []);
+
+  const getGeoLocationData = async () => {
+    // console.log("heybro")
+    const END_POINT = `https://ipapi.co/json/`;
+    const locationData = await fetch(END_POINT);
+    const finalData = await locationData.json();
+    // setLocation(finalData);
+    console.log(finalData, "he");
+    setGeolocation({
+      lat: finalData.latitude,
+      lng: finalData.longitude,
+    })
+}
+
+const SWIGGY_MENU_API = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
+const SWIGGY_DAPI = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
+const SWIGGY_MAPI = `https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
+
+console.log(SWIGGY_DAPI, "in constants")
+
+
+return  { SWIGGY_DAPI, SWIGGY_MAPI , SWIGGY_MENU_API } ;
+
+}
+
+
+export default constants;
+
 export const IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 // import { FETCH_MENU_URL } from "../constants";
 import useGeoLocation from "../components/useGeoLocation";
+import constants from "../constants";
 
 const useRestaurant = (resId) => {
   const [restaurant, setRestauraunt] = useState(null);
@@ -14,12 +15,15 @@ const useRestaurant = (resId) => {
 
   // const FETCH_MENU_URL = "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat="+lat+"&lng="+lng+"&restaurantId="
 
+  const DATA_LINKS = constants();
+  const FETCH_SWIGGY_MENU_API = DATA_LINKS.SWIGGY_MENU_API;
   useEffect(() => {
     getRestaurantInfo();
   }, []);
 
   async function getRestaurantInfo() {
-    const FETCH_MENU_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=`;
+    // const FETCH_MENU_URL = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=`;
+    const FETCH_MENU_URL = FETCH_SWIGGY_MENU_API;
 
     const data = await fetch(FETCH_MENU_URL + resId);
     const json = await data.json();
