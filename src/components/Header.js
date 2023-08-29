@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import chef from "../assets/chef.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import store from "../utils/store";
+
 
 const Title = () => (
   <a href="/">
@@ -33,6 +34,16 @@ const Header = () => {
 
   const cartItems = useSelector((store) => store.cart.items);
   // console.log(cartItems);
+
+ 
+
+  const path = useLocation();
+  // console.log(path.state?.data)
+  const isLogin = path.state?.data;
+
+  useEffect(() => {
+    
+  },[isLogin]);
 
   return (
     <div className="sticky z-50 top-0 w-full flex justify-between items-center px-2 lg:px-6 md:px-8 py-1 shadow bg-[#fd9133] text-white">
@@ -103,8 +114,8 @@ const Header = () => {
                 Logout
               </button>
             ) : (
-              <button className="login-btn" onClick={() => {navigate("/login")
-              setIsLoggedin(!isLoggedin)
+              <button className="login-btn" onClick={() => {navigate("/login", {state: {data: isLoggedin}})
+              setIsLoggedin(!isLoggedin);
               }}>
                 login
               </button>

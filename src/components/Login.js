@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import React from "react";
 import { Formik } from "formik";
+import Header from "./Header";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // create a schema for validation
 const schema = Yup.object().shape({
@@ -17,12 +18,20 @@ const schema = Yup.object().shape({
   const Login = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+
+    const path = useLocation();
+    const isLogin = path.state?.data;
+    // console.log(isLogin)
   
     useEffect(() => {
       if (token?.length === 100) {
         navigate(-1);
       }
     }, []);
+
+    // useEffect(() => {
+    //   <Header />
+    // },[isLogin])
   
     function handleNavigate(values) {
       // setTimeout for navigate from login page to home page
@@ -95,7 +104,8 @@ const schema = Yup.object().shape({
                     {errors.password && touched.password && errors.password}
                   </p>
                   {/* Click on submit button to submit the form */}
-                  <button type="submit">Login</button>
+                  <button type="submit"
+                   onClick={() => {navigate("/", {state: {data: !isLogin}})}}>Login</button>
                 </form>
               </div>
             </div>
