@@ -19,18 +19,18 @@ const [geolocation, setGeolocation] = useState({
     const locationData = await fetch(END_POINT);
     const finalData = await locationData.json();
     // setLocation(finalData);
-    console.log(finalData, "he");
+    //console.log(finalData, "he");
     setGeolocation({
       lat: finalData.latitude,
       lng: finalData.longitude,
     })
 }
+// https://corsproxy.io/?
+const SWIGGY_MENU_API = `https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
+const SWIGGY_DAPI = `https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
+const SWIGGY_MAPI = `https://cors-anywhere.herokuapp.com/https://www.swiggy.com/mapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
 
-const SWIGGY_MENU_API = `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
-const SWIGGY_DAPI = `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
-const SWIGGY_MAPI = `https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
-
-console.log(SWIGGY_DAPI, "in constants")
+// console.log(SWIGGY_DAPI, "in constants")
 
 
 return  { SWIGGY_DAPI, SWIGGY_MAPI , SWIGGY_MENU_API } ;

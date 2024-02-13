@@ -36,15 +36,18 @@ const Body = (
         ? ( FETCH_SWIGGY_DAPI )
         : ( FETCH_SWIGGY_MAPI)
       );
+      console.log(REST_URL);
     const data = await fetch(REST_URL);
+   // console.log(data, "hehehe");
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
+   // console.log(json);
     setAllRestaurants(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     console.log(allRestaurants);
     setFilteredRestaurants(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
