@@ -11,6 +11,7 @@ const RestaurantMenu = () => {
   const restaurant = useRestaurant(resId);
   const [showIndex, setShowIndex] = useState(0);
 
+  console.log(restaurant,"hiiii");
   const itemCards =
     restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
       ?.card;
@@ -21,7 +22,7 @@ const RestaurantMenu = () => {
   const i = window.innerWidth > 480 ? 2 : 3;
 
   const categories = restaurant?.cards[
-    i
+    4
   ]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
     (c) =>
       c.card?.["card"]?.["@type"] ===
@@ -38,31 +39,31 @@ const RestaurantMenu = () => {
         <div className="flex flex-col text-xs text-[#e5e6ec] font-medium gap-1">
           {/* <h1>Restraunt id: {resId}</h1> */}
           <span className="text-xl font-bold text-white">
-            {restaurant?.cards[0]?.card?.card?.info?.name}
+            {restaurant?.cards[2]?.card?.card?.info?.name}
           </span>
           <span className="">
-            {restaurant?.cards[0]?.card?.card?.info?.cuisines.join(", ")}
+            {restaurant?.cards[2]?.card?.card?.info?.cuisines.join(", ")}
           </span>
           <span className="">
-            {restaurant?.cards[0]?.card?.card?.info?.areaName},{" "}
-            {restaurant?.cards[0]?.card?.card?.info?.city}{" "}
+            {restaurant?.cards[2]?.card?.card?.info?.areaName},{" "}
+            {restaurant?.cards[2]?.card?.card?.info?.city}{" "}
             <span className="text-orange-600 font-bold">𖡡</span>
           </span>
           <span className="flex">
             <span className="flex items-center gap-1 px-1 mr-2 rounded-sm text-white bg-green-600  font-semibold">
               <span className="text-[0.7rem]">
-                {restaurant?.cards[0]?.card?.card?.info?.avgRating}{" "}
+                {restaurant?.cards[2]?.card?.card?.info?.avgRating}{" "}
               </span>
               <span className="text-white text-[0.8rem]">★ </span>
             </span>
-            | {restaurant?.cards[0]?.card?.card?.info?.totalRatingsString}
+            | {restaurant?.cards[2]?.card?.card?.info?.totalRatingsString}
           </span>
         </div>
         <img
           className="w-56 h-36 rounded"
           src={
             IMG_CDN_URL +
-            restaurant?.cards[0]?.card?.card?.info?.cloudinaryImageId
+            restaurant?.cards[2]?.card?.card?.info?.cloudinaryImageId
           }
         />
       </div>
@@ -89,7 +90,7 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[0]?.card?.card?.info?.sla?.slaString}..
+            {restaurant?.cards[2]?.card?.card?.info?.sla?.slaString}..
           </span>
         </div>
         <div className="flex items-center gap-2 font-semibold">
@@ -114,7 +115,7 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[0]?.card?.card?.info?.costForTwoMessage}
+            {restaurant?.cards[2]?.card?.card?.info?.costForTwoMessage}
           </span>
         </div>
       </div>

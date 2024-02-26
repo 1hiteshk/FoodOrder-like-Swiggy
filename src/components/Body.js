@@ -38,10 +38,10 @@ const Body = (
       );
       console.log(REST_URL);
     const data = await fetch(REST_URL);
-   // console.log(data, "hehehe");
+    console.log(data, "hehehe");
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
-   // console.log(json);
+    console.log(json);
     setAllRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
