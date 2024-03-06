@@ -22,14 +22,14 @@ const RestaurantMenu = () => {
   const i = window.innerWidth > 480 ? 2 : 3;
 
   const categories = restaurant?.cards[
-    4
+    2
   ]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
     (c) =>
       c.card?.["card"]?.["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
   // console.log(restaurant,"1");
-  // console.log(categories);
+   console.log(categories, "hehehe");
 
   if (!restaurant) return <ShimmerMenu />;
 
@@ -39,31 +39,31 @@ const RestaurantMenu = () => {
         <div className="flex flex-col text-xs text-[#e5e6ec] font-medium gap-1">
           {/* <h1>Restraunt id: {resId}</h1> */}
           <span className="text-xl font-bold text-white">
-            {restaurant?.cards[2]?.card?.card?.info?.name}
+            {restaurant?.cards[0]?.card?.card?.info?.name}
           </span>
           <span className="">
-            {restaurant?.cards[2]?.card?.card?.info?.cuisines.join(", ")}
+            {restaurant?.cards[0]?.card?.card?.info?.cuisines.join(", ")}
           </span>
           <span className="">
-            {restaurant?.cards[2]?.card?.card?.info?.areaName},{" "}
-            {restaurant?.cards[2]?.card?.card?.info?.city}{" "}
+            {restaurant?.cards[0]?.card?.card?.info?.areaName},{" "}
+            {restaurant?.cards[0]?.card?.card?.info?.city}{" "}
             <span className="text-orange-600 font-bold">𖡡</span>
           </span>
           <span className="flex">
             <span className="flex items-center gap-1 px-1 mr-2 rounded-sm text-white bg-green-600  font-semibold">
               <span className="text-[0.7rem]">
-                {restaurant?.cards[2]?.card?.card?.info?.avgRating}{" "}
+                {restaurant?.cards[0]?.card?.card?.info?.avgRating}{" "}
               </span>
               <span className="text-white text-[0.8rem]">★ </span>
             </span>
-            | {restaurant?.cards[2]?.card?.card?.info?.totalRatingsString}
+            | {restaurant?.cards[0]?.card?.card?.info?.totalRatingsString}
           </span>
         </div>
         <img
           className="w-56 h-36 rounded"
           src={
             IMG_CDN_URL +
-            restaurant?.cards[2]?.card?.card?.info?.cloudinaryImageId
+            restaurant?.cards[0]?.card?.card?.info?.cloudinaryImageId
           }
         />
       </div>
@@ -90,7 +90,7 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[2]?.card?.card?.info?.sla?.slaString}..
+            {restaurant?.cards[0]?.card?.card?.info?.sla?.slaString}..
           </span>
         </div>
         <div className="flex items-center gap-2 font-semibold">
@@ -115,13 +115,13 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[2]?.card?.card?.info?.costForTwoMessage}
+            {restaurant?.cards[0]?.card?.card?.info?.costForTwoMessage}
           </span>
         </div>
       </div>
 
       {/* categories accordian */}
-      {categories.map((category, index) => (
+      {categories?.map((category, index) => (
         // controlled component
         <RestaurantCategory
           key={category?.card?.card?.title}
