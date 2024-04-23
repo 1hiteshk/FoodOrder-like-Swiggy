@@ -14,17 +14,26 @@ const [geolocation, setGeolocation] = useState({
   }, []);
 
   const getGeoLocationData = async () => {
-    // console.log("heybro")
-    const END_POINT = `https://ipapi.co/json/`;
-    const locationData = await fetch(END_POINT);
-    const finalData = await locationData.json();
-    // setLocation(finalData);
-    //console.log(finalData, "he");
-    setGeolocation({
-      lat: finalData.latitude,
-      lng: finalData.longitude,
-    })
-}
+    try {
+      const END_POINT = `https://ipapi.co/json/`;
+      const locationData = await fetch(END_POINT);
+      if (!locationData.ok) {
+        throw new Error('Failed to fetch location data');
+      }
+      const finalData = await locationData.json();
+      setGeolocation({
+        lat: finalData?.latitude || 12.971599, // Default latitude
+        lng: finalData?.longitude || 77.594566, // Default longitude
+      });
+    } catch (error) {
+      console.error('Error fetching location data:', error.message);
+      // Set default values in case of error
+      setGeolocation({
+        lat: 12.971599, 
+        lng: 77.594566,
+      });
+    }
+  };
 // https://corsproxy.io/?
 
 const SWIGGY_MENU_API = `https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
