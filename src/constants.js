@@ -36,14 +36,14 @@ const [geolocation, setGeolocation] = useState({
   };
 // https://corsproxy.io/?
 
-const SWIGGY_MENU_API = `https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
+/* const SWIGGY_MENU_API = `https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
 const SWIGGY_DAPI = `https://foodfire.onrender.com/api/restaurants?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
 const SWIGGY_MAPI = `https://foodfire.onrender.com/api/restaurants?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
-
-/* const SWIGGY_DAPI = `https://corsproxy.org/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
-const SWIGGY_MAPI = `https://corsproxy.org/?https://www.swiggy.com/mapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
-const SWIGGY_MENU_API = `https://corsproxy.org/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
  */
+const SWIGGY_DAPI = `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
+const SWIGGY_MAPI = `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/mapi/restaurants/list/v5?lat=${geolocation.lat}&lng=${geolocation.lng}&page_type=DESKTOP_WEB_LISTING`;
+const SWIGGY_MENU_API = `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${geolocation.lat}&lng=${geolocation.lng}&restaurantId=`;
+
 
 /* const SWIGGY_DAPI = `https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D=${geolocation.lat}%26lng%3D=${geolocation.lng}%26restaurantId%3D`;
 const SWIGGY_MAPI = `https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fmapi%2Fmenu%2Fpl%3Fpage-type%3DREGULAR_MENU%26complete-menu%3Dtrue%26lat%3D=${geolocation.lat}%26lng%3D=${geolocation.lng}%26restaurantId%3D`;
@@ -59,8 +59,8 @@ return  { SWIGGY_DAPI, SWIGGY_MAPI , SWIGGY_MENU_API } ;
 
 export default constants;
 
-export const IMG_CDN_URL =
-  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+export const IMG_CDN_URL ="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+ // "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 
 // export const FETCH_MENU_URL =
 //   "https://www.swiggy.com/dapi/menu/v4/full?lat=" +lat+"&lng=" +lng+"&menuId=";
