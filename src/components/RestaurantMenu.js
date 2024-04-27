@@ -90,7 +90,7 @@ const RestaurantMenu = () => {
             ></path>
           </svg>
           <span className="">
-            {restaurant?.cards[2]?.card?.card?.info?.sla?.slaString}..
+            {restaurant?.cards[2]?.card?.card?.info?.sla?.slaString || " 30-40 MINS "}..
           </span>
         </div>
         <div className="flex items-center gap-2 font-semibold">
