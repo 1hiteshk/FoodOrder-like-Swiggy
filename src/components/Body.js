@@ -42,13 +42,15 @@ const Body = (
     // console.log("api call bani useEffect me", geolocation.latitude);
     const json = await data.json();
     console.log(json);
-    setAllRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    const restList = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    const restList2 = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    const restData = restList?.length > 0 ? restList : restList2 ;
+    console.log({restData})
+    console.log({restList2})
+    console.log({restList})
+    setAllRestaurants(restData);
+    setFilteredRestaurants(restData);
     console.log(allRestaurants);
-    setFilteredRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
   };
 
   const isOnline = useOnline();

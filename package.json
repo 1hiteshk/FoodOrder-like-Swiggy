@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/namastedev/namaste-react-live.git"
+    "url": "git+ssh://git@bitbucket.org"
   },
   "author": "Hitu ",
   "license": "ISC",
   "bugs": {
-    "url": "https://bitbucket.org/namastedev/namaste-react-live/issues"
+    "url": "https://bitbucket.org"
   },
-  "homepage": "https://bitbucket.org/namastedev/namaste-react-live#readme",
+  "homepage": "https://bitbucket.org",
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "babel-plugin-transform-remove-console": "^6.9.4",

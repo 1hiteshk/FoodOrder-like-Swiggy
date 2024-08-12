@@ -54,6 +54,7 @@ const Header = () => {
     <div className="sticky z-50 top-0 w-full flex justify-between items-center px-2 lg:px-6 md:px-8 py-1 shadow bg-[#fd9133] text-white">
      <div className="flex items-center text-sm font-normal whitespace-nowrap gap-3 md:gap-6 md:font-semibold md:text-lg"> <Title />
      {ctime}</div>
+     {/* <Timer /> */}
       <ul className="flex items-center gap-3 lg:gap-6 md:gap-12 text-sm font-medium">
         {/* <li> <input  type="text"
           className="lg:w-64 md:w-50  h-6 text-md text-black border-b-2  border-gray-900 bg-white focus:bg-[#fd9133]  transition-all duration-300 px-2 rounded"
