@@ -1,7 +1,7 @@
 {
-  "name": "namaste-react-live",
+  "name": "react-love",
   "version": "1.0.0",
-  "description": "This is a live course",
+  "description": "This is a React project that uses Parcel for bundling and Tailwind CSS for styling.",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
